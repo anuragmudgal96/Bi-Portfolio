@@ -1,0 +1,364 @@
+-- BASIC MATH & STATS FUNCTIONS	
+
+Quantity Returned = 
+SUM(
+      'Returns Data'[ReturnQuantity]
+) 
+
+Quantity Sold = 
+SUM(
+    'Sales Data'[OrderQuantity]
+)
+
+Return Rate = 
+DIVIDE(
+[Quantity Returned],
+[Quantity Sold],
+""No Sales""
+)"
+
+
+Average Retail Price = 
+ AVERAGE(
+    'Product Lookup'[ProductPrice]
+ )
+
+
+Revenue = 
+'Sales Data'[OrderQuantity]*'Sales Data'[Retail Price]"
+COUNTING FUNCTIONS	"Total Returns = 
+COUNT(
+    'Returns Data'[ReturnQuantity]
+)
+
+
+Total Returns = 
+COUNTROWS(
+    'Returns Data'
+)
+
+
+Total Returns = 
+COUNTA(
+    'Returns Data'[ProductKey]
+)
+
+
+Total Orders = 
+DISTINCTCOUNT(
+    'Sales Data'[OrderNumber]
+)
+
+--BASIC LOGICAL FUNCTIONS
+
+Quantity Type = 
+IF(
+    'Sales Data'[OrderQuantity]>1,
+    ""Multiple Items"",
+    ""Single Item""
+)
+
+
+Parent = 
+ IF('Customer Lookup'[TotalChildren]>0,
+ ""Yes"",
+ ""No""
+ )
+
+
+Customer Priority = 
+IF (
+    'Customer Lookup'[AnnualIncome]>100000 &&
+    'Customer Lookup'[Parent]=""Yes"",
+    ""Priority"",
+    ""Standard""
+)
+
+
+Weekend = 
+IF(
+    'Calendar Lookup'[Day of week]=6 ||
+    'Calendar Lookup'[Day of week]=7, 
+    ""Weekend"",
+    ""Weekday""
+)
+
+
+Weekend = 
+IF(
+    'Calendar Lookup'[Day of week] IN {6,7}, 
+    ""Weekend"",
+    ""Weekday""
+)
+
+
+Month Number (DAX) = 
+SWITCH(
+    'Calendar Lookup'[Month Name],
+    ""January"",""1"",
+    ""February"",""2"",
+    ""March"",""3"",
+    ""April"",""4"",
+    ""May"",""5"",
+    ""June"",""6"",
+    ""July"",""7"",
+    ""August"",""8"",
+    ""September"",""9"",
+    ""October"",""10"",
+    ""November"",""11"",
+    ""December"",""12""
+    ""Other""
+)
+
+Price Point =
+SWITCH(
+    'Product Lookup'[ProductPrice],
+    >500,""High"",
+    >100,""Mid-Range"",
+    ""Low""
+)
+
+
+Price Point =
+SWITCH(
+    TRUE(),
+    'Product Lookup'[ProductPrice] > 500, ""High"",
+    'Product Lookup'[ProductPrice] > 100, ""Mid-Range"",
+    ""Low""
+)
+
+
+Income Level = 
+SWITCH(
+    TRUE(),
+    'Customer Lookup'[AnnualIncome]>=150000,""Very High"",
+    'Customer Lookup'[AnnualIncome]>=100000,""High"",
+    'Customer Lookup'[AnnualIncome]>=50000,""Average"",
+    ""Low""
+)
+
+
+Education Category = 
+SWITCH(
+    TRUE(),
+    'Customer Lookup'[EducationLevel] IN {""High School"",""Partial High School""},""High School"",
+    'Customer Lookup'[EducationLevel] IN {""Bachelors"",""Partial College"",""Education""},""Undergrad"",
+    ""Graduate""
+)
+
+Education Category2 = 
+SWITCH(
+    'Customer Lookup'[EducationLevel],
+    ""High School"",""High School"",
+    ""Partial High School"",""High School"",
+    ""Bachelors"",""Undergrad"",
+    ""Partial College"",""Undergrad"",
+    ""Graduate Degree"",""Graduate""
+)
+
+--TEXT FUNCTIONS	
+Customer Full Name (CC) = 
+'Customer Lookup'[Prefix] & "" "" & 'Customer Lookup'[FirstName] & "" "" & 'Customer Lookup'[LastName]"
+	"Month Short = 
+UPPER(
+     LEFT(
+    'Calendar Lookup'[Month Name],
+    3
+))
+
+
+SKU Category = 
+LEFT(
+    'Product Lookup'[ProductSKU],
+    SEARCH(""-"",'Product Lookup'[ProductSKU])-1
+    )
+
+
+DATE & TIME	"Day of week = 
+WEEKDAY('Calendar Lookup'[Date],2
+)
+
+
+Birth Year = 
+YEAR(
+    'Customer Lookup'[BirthDate]
+)
+
+--RELATED	
+
+Retail Price = 
+RELATED(
+    'Product Lookup'[ProductPrice]
+)
+CALCULATE	"Bulk Order = 
+CALCULATE(
+    [Total Orders],
+    'Sales Data'[OrderQuantity]>1
+)
+
+Weekend Orders = 
+CALCULATE(
+    [Total Orders],
+    'Calendar Lookup'[Weekend]=""Weekend""
+)
+
+All Orders = 
+CALCULATE(
+    [Total Orders],
+    ALL(
+        'Sales Data'
+    )
+)
+
+% of all orders = 
+DIVIDE(
+    [Total Orders],
+    [All Orders]
+)
+
+Overall Average Price = 
+CALCULATE(
+    [Average Retail Price],
+    ALL('Product Lookup')
+)
+
+
+All Returns = 
+CALCULATE(
+    [Total Returned],
+    ALL('Returns Data')
+)
+
+
+% of all returns = 
+DIVIDE(
+    [Total Returned],
+    [All Returns]
+)
+
+
+High Ticket Orders = 
+CALCULATE(
+    [Total Orders],
+    'Product Lookup'[ProductPrice]>714.44
+)
+
+High Ticket Orders = 
+CALCULATE(
+    [Total Orders],
+    FILTER('Product Lookup',
+    'Product Lookup'[ProductPrice]>[Overall Average Price]
+))
+
+--ITERATOR FUNCTIONS	
+
+Total Revenue = 
+SUMX(
+    'Sales Data',
+    'Sales Data'[OrderQuantity]*'Sales Data'[Retail Price]
+    )
+
+
+Total Revenue = 
+SUMX(
+    'Sales Data',
+    'Sales Data'[OrderQuantity]*
+    RELATED(
+        'Product Lookup'[ProductPrice]
+        )
+    )
+
+Average Revenue per Customer = 
+DIVIDE(
+    [Total Revenue],
+    [Total Customers]
+)
+
+
+Total Cost = 
+SUMX(
+    'Sales Data',
+    'Sales Data'[OrderQuantity]*
+    RELATED(
+        'Product Lookup'[ProductCost]
+    )
+)
+
+
+Total Profit = 
+[Total Revenue]-[Total Cost]"
+TIME INTELLIGENCE PATTERNS	"YTD Revenue = 
+CALCULATE(
+    [Total Revenue],
+    DATESYTD(
+        'Calendar Lookup'[Date]
+    )
+)
+
+Previous Month Revenue = 
+CALCULATE(
+    [Total Revenue],
+    DATEADD(
+        'Calendar Lookup'[Date],
+        -1,
+        MONTH
+    )
+)
+
+Revenue Target = 
+[Previous Month Revenue]*1.1"
+	"10-day Rolling Revenue = 
+CALCULATE(
+    [Total Revenue],
+    DATESINPERIOD('Calendar Lookup'[Date],
+        MAX(
+            'Calendar Lookup'[Date]
+        ),
+        -10,
+        DAY
+    )
+)
+
+--Handling Multiple output value	
+
+Total Orders (Customer Detail) = 
+IF(
+    HASONEVALUE(
+        'Customer Lookup'[CustomerKey]),
+        [Total Orders],
+        ""-""
+)
+
+Total Revenue (Customer Detail) = 
+IF(
+    HASONEVALUE(
+        'Customer Lookup'[CustomerKey]),
+        [Total Revenue],
+        ""-""
+    )
+
+Full Name (Customer Detail) = 
+IF(
+    HASONEVALUE(
+        'Customer Lookup'[CustomerKey]),
+        MAX('Customer Lookup'[Customer Full Name (CC)]),
+        ""Multiple Customer""
+    )
+
+--Conditional Formatting
+
+Order Target Gap = [Total Orders]-[Order Target]
+	Revenue Target Gap = [Total Revenue]-[Revenue Target]
+	Profit Target Gap = [Total Profit ]-[Profit Target]
+PARAMETER	Adjusted Price = [Average Retail Price]*(1+'Price Adjustment (%)'[Price Adjustment (%) Value])
+
+
+Adjusted Revenue = 
+SUMX(
+    'Sales Data',
+    'Sales Data'[OrderQuantity]*
+    [Adjusted Price]
+    )
+
+Adjusted Profit = 
+[Adjusted Revenue]-[Total Cost]
