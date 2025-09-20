@@ -39,3 +39,6 @@ Dashboard [Link](https://github.com/anuragmudgal96/Bi-Portfolio/blob/main/Ecomme
 - Create calculated columns and measures with DAX
 - Design an interactive dashboard to visualize the data, enabling users to drill down into key insights.
 - Publish Power BI report to the Power BI service.
+
+## Learning Journey
+This analysis is from the [*Microsoft Power BI Desktop for Business Intelligence*](https://www.udemy.com/certificate/UC-e3086735-9da6-43b0-bd73-29ba3b90f696/) course by Maven Analytics (17-hour course), which was an engaging and informative experience.
