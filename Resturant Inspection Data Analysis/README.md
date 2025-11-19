@@ -24,16 +24,14 @@ Dataset consist of fact table having 1 Mn records with 25 columns containing hea
 ## Dashboard:
 <img width="940" height="490" alt="image" src="https://github.com/user-attachments/assets/e48c9109-52ee-433a-996f-da6b1ec14236" />
 
-## Learning Outcomes:
-- Connected on-premises data sources using the On-Premises Data Gateway
-- Built interactive reports and dashboards within Power BI workspaces
-- Automated dataflows and configured scheduled refreshes
-- Shared reports and collaborated within the Power BI ecosystem
-- Created and published a Power BI App for streamlined distribution
-- Added data-driven alerts to dashboards for proactive monitoring of key metrics
-- Configured user roles and implemented Row-Level Security (RLS) to ensure data governance
-- Automated end-to-end workflows using gateways, dataflows, and scheduled refresh mechanisms
-- Designed and managed static and dynamic RLS to deliver audience-specific data views
+## Learning Outcomes:  
+- Connected on-prem data using On-Premises Data Gateway
+- Built interactive reports and dashboards in Power BI Service
+- Automated refresh using Dataflows + Scheduled Refresh
+- Published and shared reports via Workspaces & Power BI Apps
+- Implemented RLS (static & dynamic) for secure data access
+- Added data-driven alerts for proactive monitoring
+- Designed star schema models (Fact/Dim)
+- Created semantic models with DAX measures for analytics
 - Ingested and transformed data using Dataflow Gen2
-- Designed a star schema data model (fact and dimension tables)
-- Built a semantic model and developed DAX measures for advanced analytics
+- Automated end-to-end workflows using Gateways, Dataflows, Pipelines
