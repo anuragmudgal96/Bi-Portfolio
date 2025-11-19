@@ -3,6 +3,8 @@
 ### Project Objective (Business Problem):
 Our goal is to use Microsoft Fabric & Power BI Service (and Desktop) to build  end-to-end analytics pipeline for scalable reports & dashboards from the inspection data that can be shared across the company for collaboration.
 
+<img width="597" height="234" alt="Power BI Services drawio (1)" src="https://github.com/user-attachments/assets/024488b7-8ee9-4a79-8e97-7bd9493cdd44" />
+
 <img width="940" height="366" alt="image" src="https://github.com/user-attachments/assets/7c24cfe0-47c6-4db6-90be-e808ef201782" />
 
 ## KPIs & Metrics:
@@ -19,6 +21,7 @@ Dataset consist of fact table having 1 Mn records with 25 columns containing hea
 - From the Model view, created relationships to connect the fact table to all lookup tables
 
 <img width="940" height="363" alt="image" src="https://github.com/user-attachments/assets/a1667595-d079-427a-86a1-b3be455271bf" />
+
 
 
 ## Dashboard:
