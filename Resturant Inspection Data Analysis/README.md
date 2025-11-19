@@ -22,6 +22,8 @@ Dataset consist of fact table having 1 Mn records with 25 columns containing hea
 
 
 ## Dashboard:
+Dashboard [Link](https://github.com/anuragmudgal96/Bi-Portfolio/blob/main/Resturant%20Inspection%20Data%20Analysis/Resturant%20Inspection%20Data%20Analysis.pdf)
+
 <img width="940" height="490" alt="image" src="https://github.com/user-attachments/assets/e48c9109-52ee-433a-996f-da6b1ec14236" />
 
 ## Learning Outcomes:  
