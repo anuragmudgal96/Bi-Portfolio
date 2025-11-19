@@ -10,7 +10,7 @@ An end-to-end SQL & Power BI integration project to track KPIs (sales, revenue, 
 - Utilized Power BI bookmarks to enhance dashboard interactivity and improve user navigation.
 
 ### [Resturant Inspection Data Analysis](https://github.com/anuragmudgal96/Bi-Portfolio/tree/main/Resturant%20Inspection%20Data%20Analysis)
-An end-to-end Microsoft Fabric and Power BI analytics solution built using Fabric Dataflows Gen2, Semantic Models, and DAX.
+Built a complete Fabric pipeline using Fabric Dataflows Gen2, Semantic Models, and DAX to track inspections, violations, and monthly sanitary grade KPIs
 - Connected on-premises data via the On-Premises Data Gateway and automated refresh using Dataflows and Scheduled Refresh
 - Analysed Violations data by key metrics like Total Violations, All Violations, % of All Violations, Average Sanitary Grade, Previous Month Avg Sanitary Grade
 - Used Dax Measure to calculate Total Inspections, All Inspections, % of All Inspections, Previous Month Total Inspections
